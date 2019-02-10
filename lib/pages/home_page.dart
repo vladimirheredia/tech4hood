@@ -21,6 +21,12 @@ class _HomePageState extends State<HomePage> {
       Color.fromARGB(255, 31, 40, 90),
       'events'
     ),
+    MenuItemModel(
+      'Members',
+      'user_gray.png',
+      Color.fromARGB(255, 31, 40, 80),
+      'members'
+    ),
      MenuItemModel(
       'Social Media',
       'share_white.png',

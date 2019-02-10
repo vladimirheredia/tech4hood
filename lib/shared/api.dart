@@ -5,15 +5,15 @@ const baseUrl = 'https://us-central1-tech4hood.cloudfunctions.net';
 class API{
 
   //gets all events from meetup api
-  static Future  getAllEvents(){
+  static Future getAllEvents() async{
     var url = baseUrl + '/getEvents';
-    return http.get(url);
+    return await http.get(url);
   }
 
   //gets all the members from meetup api
-  static Future getAllMembers(){
+  static Future getAllMembers() async{
     var url = baseUrl + '/getMembers';
-    return http.get(url);
+    return await http.get(url);
   }
   
 }
