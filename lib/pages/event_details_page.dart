@@ -63,10 +63,6 @@ class EventDetailsPage extends StatelessWidget {
                     ),
                   ),
                   getDescription(),
-                  Divider(
-                    color: Colors.grey[300],
-                    height: 1,
-                  )
                 ],
               )
               );
