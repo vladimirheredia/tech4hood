@@ -9,4 +9,11 @@ class API{
     var url = baseUrl + '/getEvents';
     return http.get(url);
   }
+
+  //gets all the members from meetup api
+  static Future getAllMembers(){
+    var url = baseUrl + '/getMembers';
+    return http.get(url);
+  }
+  
 }
