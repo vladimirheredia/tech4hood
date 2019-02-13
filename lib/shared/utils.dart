@@ -5,6 +5,7 @@ import '../pages/social_media_page.dart';
 import '../pages/our_apps_page.dart';
 import '../pages/media_page.dart';
 import '../pages/members_page.dart';
+import '../pages/twitter_page.dart';
 
 class Utilities {
   static List<Widget> menuWidgets(
@@ -68,6 +69,9 @@ class Utilities {
       case 'misc':
         pageWidget = EventsPage('Events');
         break;
+      case 'tw':
+        pageWidget = TwitterPage('Twitter');
+      break;
     }
 
     return pageWidget;
