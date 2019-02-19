@@ -11,61 +11,68 @@ class EventDetailsPage extends StatelessWidget {
   // Return html viewer
   // and parse it from the description field
   HtmlView getDescription() {
-    var descWords =
-        _event.description.toString().split(" ").take(150).join(" ") + "...";
+    var descWords = _event.description.toString();
 
     return HtmlView(data: descWords);
   }
 
   //return event information
-  Widget getEventDetail(Event event){
+  Widget getEventDetail(
+      Event event, BuildContext context, BoxConstraints viewPortConstraints) {
     return Container(
-              padding: EdgeInsets.only(top: 10, left: 10, right: 10),
-              child: Column(
+        padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(bottom: 20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(bottom: 20),
-                    child: Row(
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      child: Image.asset('assets/meetup_icon.png',
+                          width: 50.0, height: 50.0, fit: BoxFit.contain)),
+                  Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          child: Image.asset('assets/meetup_icon.png', width: 50.0, height: 50.0, fit: BoxFit.contain)
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 250,
-                                child: Text(
-                                  event.name,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15),
-                                ),
-                              ),
-                              Text("Date: " + event.localDate),
-                              Text(event.venueName),
-                              Text(
-                                event.venueAddress,
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                              Text(
-                                event.groupLocaltion,
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                            ],
+                        Container(
+                          width: 250,
+                          child: Text(
+                            event.name,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 15),
                           ),
-                        )
+                        ),
+                        Text("Date: " + event.localDate),
+                        Text(event.venueName),
+                        Text(
+                          event.venueAddress,
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                        Text(
+                          event.groupLocaltion,
+                          style: TextStyle(color: Colors.grey),
+                        ),
                       ],
                     ),
-                  ),
-                  getDescription(),
+                  )
                 ],
-              )
-              );
+              ),
+            ),
+            Divider(
+              color:Colors.grey,
+              height: 10,
+            ),
+            SingleChildScrollView(
+                child: ConstrainedBox(
+                    constraints: BoxConstraints(minHeight: 100, maxHeight: 450),
+                    child: ListView(
+                      children: <Widget>[getDescription()],
+                    ))),
+          ],
+        ));
   }
 
   @override
@@ -75,9 +82,9 @@ class EventDetailsPage extends StatelessWidget {
           backgroundColor: Utilities.blueOne,
           title: Text('Event details'),
         ),
-        body: Container(child: 
-          getEventDetail(_event)
-        ,) 
-        );
+        body: Container(
+          child: getEventDetail(
+              _event, context, new BoxConstraints(maxHeight: 300)),
+        ));
   }
 }

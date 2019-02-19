@@ -27,8 +27,8 @@ class Event extends Object{
       name: json['name'],
       localDate: json['local_date'],
       localTime: json['local_time'],
-      venueName: json['venue']['name'],
-      venueAddress: json['venue']['address_1'],
+      venueName: json['venue'] != null ? json['venue']['name'] : '',
+      venueAddress: json['venue'] != null ? json['venue']['address_1']: '',
       groupLocaltion: json['group']['localized_location'],
       description: json['description']
     );

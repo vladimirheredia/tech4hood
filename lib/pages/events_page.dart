@@ -17,8 +17,8 @@ class EventsPage extends StatefulWidget {
 
 class _EventsPageState extends State<EventsPage> {
   //method that calls the past events
-  List<Event> pastEvents;
-  List<Event> futureEvents;
+  List<Event> pastEvents = List<Event>();
+  List<Event> futureEvents= List<Event>();
 
   void _getAllEvents() {
     API.getAllEvents().then((response) {
@@ -131,7 +131,7 @@ class _EventsPageState extends State<EventsPage> {
           ),
           title: Text(widget.title),
         ),
-        body: pastEvents != null
+        body: (pastEvents.length > 0)
             ? TabBarView(
                 children: [
                   // tab 1 content
