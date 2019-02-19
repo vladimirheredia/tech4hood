@@ -17,8 +17,7 @@ class EventDetailsPage extends StatelessWidget {
   }
 
   //return event information
-  Widget getEventDetail(
-      Event event, BuildContext context, BoxConstraints viewPortConstraints) {
+  Widget getEventDetail(Event event) {
     return Container(
         padding: EdgeInsets.only(top: 10, left: 10, right: 10),
         child: Column(
@@ -62,7 +61,7 @@ class EventDetailsPage extends StatelessWidget {
               ),
             ),
             Divider(
-              color:Colors.grey,
+              color: Colors.grey,
               height: 10,
             ),
             SingleChildScrollView(
@@ -83,8 +82,7 @@ class EventDetailsPage extends StatelessWidget {
           title: Text('Event details'),
         ),
         body: Container(
-          child: getEventDetail(
-              _event, context, new BoxConstraints(maxHeight: 300)),
+          child: getEventDetail(_event),
         ));
   }
 }
