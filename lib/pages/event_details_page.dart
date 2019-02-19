@@ -62,11 +62,11 @@ class EventDetailsPage extends StatelessWidget {
             ),
             Divider(
               color: Colors.grey,
-              height: 10,
+              height: 15,
             ),
             SingleChildScrollView(
                 child: ConstrainedBox(
-                    constraints: BoxConstraints(minHeight: 100, maxHeight: 450),
+                    constraints: BoxConstraints(minHeight: 100, maxHeight: 420),
                     child: ListView(
                       children: <Widget>[getDescription()],
                     ))),
