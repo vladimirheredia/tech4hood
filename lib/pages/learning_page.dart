@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class MediaPage extends StatefulWidget {
+class LearningPage extends StatefulWidget {
 
   final String title;
 
-  MediaPage(this.title);
+  LearningPage(this.title);
 
   @override
-  _MediaPageState createState() =>  _MediaPageState();
+  _LearningPageState createState() =>  _LearningPageState();
 
 }
 
-class _MediaPageState extends State<MediaPage> {
+class _LearningPageState extends State<LearningPage> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
