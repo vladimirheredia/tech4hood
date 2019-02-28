@@ -14,44 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  List<MenuItemModel> menuItems = <MenuItemModel>[
-     MenuItemModel(
-      'Events',
-      'calendar_white.png',
-      Color.fromARGB(255, 31, 40, 90),
-      'events'
-    ),
-    MenuItemModel(
-      'Members',
-      'user_gray.png',
-      Color.fromARGB(255, 31, 40, 80),
-      'members'
-    ),
-     MenuItemModel(
-      'Social Media',
-      'share_white.png',
-      Color.fromARGB(255, 54, 84, 144),
-      'social'
-    ),
-     MenuItemModel(
-      'Our Apps',
-      'phone_white.png',
-      Color.fromARGB(255, 82, 122, 170),
-      'apps'
-    ),
-     MenuItemModel(
-      'Media',
-      'next_white.png',
-      Color.fromARGB(255, 127, 177, 210),
-      'media'
-    ),
-     MenuItemModel(
-      'Miscellaneous',
-      'next_white.png',
-      Color.fromARGB(255, 154, 215, 255),
-      'misc'
-    )
-  ];
+  
 
   @override
   Widget build(BuildContext context) {
@@ -72,13 +35,16 @@ class _HomePageState extends State<HomePage> {
       ),
         appBar: AppBar(
           //automaticallyImplyLeading: false,
-          title: Center(child: Image.asset('assets/t4h_full_logo.png', width:120),),
-          backgroundColor: Color.fromARGB(255, 18, 20, 61),
-          
+          title: Image.asset('assets/t4h_full_logo.png', width:150),
+          backgroundColor: Utilities.themeBlue,
+          elevation: 0.0,
         ),
-        body:  ListView(
-          shrinkWrap: true,
-          children: Utilities.menuWidgets(context, menuItems),
+        body:  Container(
+          color: Utilities.themeBlue,
+          child: ListView(
+            shrinkWrap: true,
+            children: Utilities.menuWidgets(context, Utilities.getMenuItems()),
+          ),
         )
       );
   }

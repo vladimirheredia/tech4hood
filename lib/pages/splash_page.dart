@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:async';
 import './home_page.dart';
 
@@ -7,14 +8,13 @@ class SplashPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-       Timer.run(() {
-       Timer( Duration(days: 0, hours: 0, minutes: 0, seconds: 2, microseconds: 0, milliseconds: 0), () {
-        Navigator.push(
+      
+       Future.delayed(const Duration(milliseconds: 1000), () {
+         Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => HomePage('Tech4Hood')),
-            );
-      });
-    });
+         );
+       });
 
     return  Scaffold(
       backgroundColor: Color.fromARGB(255, 45, 92, 129),
