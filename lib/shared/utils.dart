@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tech4hood/models/instagram_entry.dart';
 import 'package:tech4hood/models/resources.dart';
+import 'package:tech4hood/pages/instagram_page.dart';
 import 'package:tech4hood/pages/learning_page.dart';
 import 'package:tech4hood/pages/resources_page.dart';
+import 'package:tech4hood/pages/youtube_page.dart';
 import '../models/menu_item.dart';
 import '../pages/events_page.dart';
 import '../pages/social_media_page.dart';
@@ -12,6 +15,8 @@ import '../pages/twitter_page.dart';
 class Utilities {
 
   static Color themeBlue = Color.fromARGB(255, 18, 20, 61);
+
+  static Color twitterBlue = Color.fromARGB(255, 75, 162, 235);
 
   static List<MenuItemModel> getMenuItems() {
       return <MenuItemModel>[
@@ -100,6 +105,8 @@ class Utilities {
   //miscellaneous color
   static const Color blueFive = Color.fromARGB(255, 154, 215, 255);
 
+  static const Color instagramColor = Color.fromARGB(255, 158, 75, 150);
+
   static StatefulWidget getPageFromId(String id) {
     StatefulWidget pageWidget;
     switch (id) {
@@ -123,12 +130,27 @@ class Utilities {
         break;
       case 'tw':
         pageWidget = TwitterPage('Twitter');
+        break;
+      case 'instagram':
+        pageWidget = InstagramPage('Instagram');
+      break;
+      case 'yt':
+        pageWidget = YouTubePage('YouTube');
       break;
     }
 
     return pageWidget;
   }
 
+  static Widget getInstagramCell(InstagramEntry entry, Function onSelectedImage) {
+    return GridTile(
+      child: InkResponse(
+        child: Image.network(entry.thumbnail, fit: BoxFit.cover),
+        onTap: () => onSelectedImage(entry),
+      )
+      
+    );
+  }
 
   static Widget getResourceRowWidget(ResourceModel resource, Function onSelectedResource) {
     return InkWell(

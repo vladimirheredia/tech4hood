@@ -23,7 +23,7 @@ class API {
   }
 
   //gets all instagram feeds
-  static Future getInstragramFeed() async {
+  static Future getInstagramFeed() async {
     var url = baseUrl + '/getInstagramFeed';
     return await http.get(url);
   }

@@ -16,12 +16,6 @@ class SocialMediaPage extends StatefulWidget {
 class _SocialMediaPageState extends State<SocialMediaPage> {
 
   List<MenuItemModel> menuItems = <MenuItemModel>[
-    //  MenuItemModel(
-    //   'Facebook',
-    //   'social_facebook.png',
-    //   Color.fromARGB(255, 51, 79, 141),
-    //   'fb'
-    // ),
      MenuItemModel(
       'Twitter',
       'social_twitter.png',
@@ -34,7 +28,7 @@ class _SocialMediaPageState extends State<SocialMediaPage> {
       'social_instagram.png',
       Color.fromARGB(255, 158, 75, 150),
       Colors.white,
-      'inst'
+      'instagram'
     ),
      MenuItemModel(
       'YouTube',
