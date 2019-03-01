@@ -3,6 +3,7 @@ import '../shared/api.dart';
 import 'dart:convert';
 import '../models/tweet.dart';
 import '../shared/utils.dart';
+import 'package:intl/intl.dart';
 
 class TwitterPage extends StatefulWidget {
   final String title;
@@ -25,7 +26,6 @@ class TwitterPageState extends State<TwitterPage> {
 
       setState(() {
         var allTweets = json.decode(response.body);
-        if (allTweets.keys.first == 'errors') return;
         tweets = List<Widget>();
 
         for (var item in allTweets) {
@@ -62,17 +62,29 @@ class TwitterPageState extends State<TwitterPage> {
         children: <Widget>[
           Container(
               padding: EdgeInsets.all(20),
-              child: ListTile(
-                title: Text(
-                  tweet.created,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
-                ),
-                subtitle: Text(tweet.description),
-                leading: Icon(
-                  Icons.description,
-                  color: Colors.blue[500],
-                ),
-              )),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    margin:EdgeInsets.only(right: 20),
+                    child: Image.asset('assets/social_twitter_blue.png', width: 50, height: 50,),
+                  ),
+                  Container(
+                    width: 300,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          getSplittedFormattedDate(tweet.created),
+                          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                        ),
+                        Text(tweet.description)
+                      ],
+                    ),
+                  )
+                ],
+              )
+          ),
           Divider(
             color: Colors.grey[300],
             height: 1,
@@ -82,11 +94,16 @@ class TwitterPageState extends State<TwitterPage> {
     );
   }
 
+  String getSplittedFormattedDate(String date) {
+    var values = date.split(' ');
+    return values[0] + ", " + values[1] + " " + values[2] + ' ' + values[5];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Utilities.blueThree,
+          backgroundColor: Utilities.twitterBlue,
           title: Text('Tweets'),
         ),
         body: Container(
@@ -95,7 +112,7 @@ class TwitterPageState extends State<TwitterPage> {
                   ? ListView(children: getWidgets())
                   : Center(child: CircularProgressIndicator())
               : Center(
-                  child: Text('No items to show, try again later!'),
+                  child: Center(child: CircularProgressIndicator()),
                 ),
         ));
   }
