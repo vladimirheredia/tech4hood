@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tech4hood/models/instagram_entry.dart';
 import 'package:tech4hood/shared/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:intl/intl.dart';
 
 class InstagramDetailsPage extends StatefulWidget {
 
@@ -60,7 +61,17 @@ class _InstagramDetailsPageState extends State<InstagramDetailsPage> {
                           width: 300,
                           child: Padding(
                             padding: EdgeInsets.only(left: 20),
-                            child: Text(widget.entry.caption, style: TextStyle(fontSize: 16),),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(bottom: 10),
+                                  child: Text(DateFormat.MMMMEEEEd('en_US').format(DateTime.parse(widget.entry.createdTime)), 
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                                ),
+                                Text(widget.entry.caption, style: TextStyle(fontSize: 16)),
+                              ],
+                            ),
                           ),
                         )
                       ],
@@ -106,14 +117,15 @@ class _InstagramDetailsPageState extends State<InstagramDetailsPage> {
                                   Image.asset('assets/social_instagram.png', width: 25,),
                                   Container(
                                     margin: EdgeInsets.only(left: 10),
-                                    child: Text('View on Instagram', style: TextStyle(color: Colors.white)),
+                                    child: Text('View on Instagram', style: TextStyle(color: Colors.white, fontSize: 20)),
                                   )
                                 ],
                               ),
                             ),
                             onPressed:  () {
                               onSelectedResource(widget.entry);
-                            }
+                            },
+                            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
                           )
                         ],
                       ),
