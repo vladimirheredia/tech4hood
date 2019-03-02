@@ -34,6 +34,18 @@ class API {
     return await http.get(url);
   }
 
+  //gets all contact info for tech4hood
+  static Future getContactInfo() async {
+    var url = baseUrl + '/getContactInfo';
+    return await http.get(url);
+  }
+
+  //gets all team members
+  static Future getTech4HoodTeam() async {
+    var url = baseUrl + '/getTech4HoodTeam';
+    return await http.get(url);
+  }
+
   //get youtube videos
   static Future getYoutubeVideos() async {
     var url = baseUrl + '/getResources';
