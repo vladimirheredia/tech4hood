@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tech4hood/models/menu_item.dart';
 import '../shared/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -14,8 +15,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  
   @override
   Widget build(BuildContext context) {
+
+    List<MenuItemModel> menus = Utilities.getMenuItems();
+    
     return  Scaffold(
       drawer: Container(
         padding: EdgeInsets.only(top: 50.0),
@@ -97,9 +102,11 @@ class _HomePageState extends State<HomePage> {
         ),
         body:  Container(
           color: Utilities.themeBlue,
-          child: ListView(
-            shrinkWrap: true,
-            children: Utilities.menuWidgets(context, Utilities.getMenuItems()),
+          child: ListView.builder(
+            itemCount: menus.length,
+            itemBuilder: (context, index) {
+              return Utilities.getSingleMenuItemWidget(context, menus[index]);
+            },
           ),
         )
       );

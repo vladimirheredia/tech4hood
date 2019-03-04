@@ -21,21 +21,24 @@ class _SocialMediaPageState extends State<SocialMediaPage> {
       'social_twitter.png',
       Color.fromARGB(255, 75, 162, 235),
       Colors.white,
-      'tw'
+      'tw',
+      'twitter_banner.jpg'
     ),
      MenuItemModel(
       'Instagram',
       'social_instagram.png',
       Color.fromARGB(255, 158, 75, 150),
       Colors.white,
-      'instagram'
+      'instagram',
+      'instagram_banner.jpg'
     ),
      MenuItemModel(
       'YouTube',
       'social_youtube.png',
       Color.fromARGB(255, 233, 25, 33),
       Colors.white,
-      'yt'
+      'yt',
+      'youtube_banner.jpg'
     )
   ];
 

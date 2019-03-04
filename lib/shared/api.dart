@@ -28,6 +28,11 @@ class API {
     return await http.get(url);
   }
 
+  static Future getT4HShop() async {
+    var url = baseUrl + '/getT4HShop';
+    return await http.get(url);
+  }
+
   //gets all resources
   static Future getResources() async {
     var url = baseUrl + '/getResources';
