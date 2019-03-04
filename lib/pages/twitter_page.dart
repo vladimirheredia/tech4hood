@@ -70,7 +70,7 @@ class TwitterPageState extends State<TwitterPage> {
                     child: Image.asset('assets/social_twitter_blue.png', width: 50, height: 50,),
                   ),
                   Container(
-                    width: 300,
+                    width: 260,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
