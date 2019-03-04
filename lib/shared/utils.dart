@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:tech4hood/models/contact_model.dart';
 import 'package:tech4hood/models/instagram_entry.dart';
 import 'package:tech4hood/models/resources.dart';
+import 'package:tech4hood/models/shopentry.dart';
 import 'package:tech4hood/models/team_member.dart';
 import 'package:tech4hood/pages/contact_page.dart';
 import 'package:tech4hood/pages/instagram_page.dart';
 import 'package:tech4hood/pages/learning_page.dart';
 import 'package:tech4hood/pages/resources_page.dart';
+import 'package:tech4hood/pages/shop_page.dart';
 import 'package:tech4hood/pages/team_page.dart';
 import 'package:tech4hood/pages/youtube_page.dart';
 import '../models/menu_item.dart';
@@ -21,6 +23,7 @@ class Utilities {
   static Color themeBlue = Color.fromARGB(255, 18, 20, 61);
   static const Color googleGreen = Color.fromRGBO(22, 157, 85, 1.0);
   static Color twitterBlue = Color.fromARGB(255, 75, 162, 235);
+  static Color shopBlue = Color.fromARGB(255, 3, 49, 122);
 
   static List<MenuItemModel> getMenuItems() {
       return <MenuItemModel>[
@@ -29,73 +32,128 @@ class Utilities {
         'calendar_white.png',
         Utilities.themeBlue,
         Colors.white,
-        'events'
+        'events',
+        'events_banner.jpeg'
       ),
       MenuItemModel(
         'Members',
         'user_white.png',
         Color.fromARGB(255, 31, 40, 80),
         Colors.white,
-        'members'
+        'members',
+        'members_banner.jpeg'
+      ),
+      MenuItemModel(
+        'Shop',
+        'shop_icon.png',
+        Utilities.shopBlue,
+        Colors.white,
+        'shop',
+        'shop_banner.jpeg'
       ),
       MenuItemModel(
         'Social Media',
         'share_white.png',
         Color.fromARGB(255, 54, 84, 144),
         Colors.white,
-        'social'
+        'social',
+        'socialmedia_banner.jpeg'
       ),
       MenuItemModel(
         'Our Team',
         't4h_team.png',
         Color.fromARGB(255, 82, 122, 170),
         Colors.white,
-        'team'
+        'team',
+        'ourteam_banner.jpeg'
       ),
       MenuItemModel(
         'Resources',
         'cog_white.png',
         Color.fromARGB(255, 127, 177, 210),
         Colors.white,
-        'resources'
+        'resources',
+        'resources_banner.jpeg'
       ),
       MenuItemModel(
         'Learning',
         'learning_blue.png',
         Color.fromARGB(255, 154, 215, 255),
         Color.fromARGB(255, 31, 40, 80),
-        'learning'
+        'learning',
+        'learning_banner.jpeg'
       )
     ];
   }
 
-  static List<Widget> menuWidgets(
-      BuildContext context, List<MenuItemModel> menuItems) {
-    return List<Widget>.generate(
-      menuItems.length,
-      (int index) => GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      Utilities.getPageFromId(menuItems[index].id)),
-            );
-          },
-          child: Container(
-            color: menuItems[index].bgColor,
-            padding: EdgeInsets.all(40.0),
-            child: Column(children: <Widget>[
-              Image.asset('assets/' + menuItems[index].image,
-                  width: 40.0, height: 40.0, fit: BoxFit.contain),
-              Container(
-                margin: EdgeInsets.only(top: 10.0),
-                child: Text(menuItems[index].label,
-                    style: TextStyle(color: menuItems[index].labelColor)),
+  static List<Widget> menuWidgets(BuildContext context, List<MenuItemModel> menuItems) {
+
+    List<Widget> menuWidgets = List<Widget>();
+
+    menuItems.forEach((MenuItemModel menu) {
+      menuWidgets.add(getSingleMenuItemWidget(context, menu));
+    });
+
+    return menuWidgets;
+  }
+
+  static Widget getSingleMenuItemWidget(BuildContext context, MenuItemModel menu) {
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    Utilities.getPageFromId(menu.id)),
+          );
+        },
+        child: Container(
+          height: 200,
+          color: menu.bgColor.withOpacity(0.9),
+          child: Stack(
+            children: <Widget>[
+              Opacity(
+                opacity: 0.1,
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: Image.asset('assets/' + menu.bgImage).image,
+                      fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(menu.bgColor, BlendMode.color)
+                    )
+                  ),
+                  padding: EdgeInsets.all(40.0)
+                ),
+              ),
+              Center(
+                child: Opacity(
+                  opacity: 1,
+                  child: ClipOval(
+                    child: Container(
+                      width: 120,
+                      height: 120,
+                      color: menu.bgColor,
+                    ),
+                  ),
+                ),
+              ),
+              Center(
+                child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset('assets/' + menu.image,
+                      width: 40.0, height: 40.0, fit: BoxFit.contain),
+                  Container(
+                    margin: EdgeInsets.only(top: 10.0),
+                    child: Text(menu.label,
+                        style: TextStyle(color: menu.labelColor)),
+                  )
+                ]),
               )
-            ]),
-          )),
-    );
+            ],
+          ),
+        )
+      );
   }
 
   //events color
@@ -146,6 +204,9 @@ class Utilities {
         break;
       case 'contact':
         pageWidget = ContactPage('Contact Us');
+        break;
+      case 'shop':
+        pageWidget = ShopPage('Shop');
         break;
     }
 
@@ -360,6 +421,23 @@ class Utilities {
           )
         ],
       ),
+    );
+  }
+
+  static Widget getShopEntries(ShopEntry item) {
+    return Container(
+      padding:EdgeInsets.only(top: 20, bottom: 50),
+      child: Column(
+        children: <Widget>[
+          Image.network(item.imgPath, height: 300),
+          Container(
+            width: 200,
+            margin:EdgeInsets.only(top: 10),
+            child: Text(item.name, textAlign: TextAlign.center, 
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+          )
+        ],
+      )
     );
   }
 }
