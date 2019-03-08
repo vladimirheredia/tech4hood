@@ -92,7 +92,7 @@ class _EventsPageState extends State<EventsPage> {
                                 style: TextStyle(color: Colors.grey),
                               ),
                               Text(
-                                events[index].groupLocaltion,
+                                events[index].groupLocation,
                                 style: TextStyle(color: Colors.grey),
                               ),
                             ],
