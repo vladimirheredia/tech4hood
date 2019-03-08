@@ -3,7 +3,7 @@ import '../shared/utils.dart';
 import '../models/event.dart';
 import '../shared/api.dart';
 import 'dart:convert';
-//import 'package:date_format/date_format.dart';
+import 'package:intl/intl.dart';
 import '../pages/event_details_page.dart';
 
 class EventsPage extends StatefulWidget {
@@ -85,7 +85,7 @@ class _EventsPageState extends State<EventsPage> {
                                       fontSize: 15),
                                 ),
                               ),
-                              Text("Date: " + events[index].localDate),
+                              Text("Date: " + DateFormat.yMMMd('en_US').format(DateTime.parse(events[index].localDate))),
                               Text(events[index].venueName),
                               Text(
                                 events[index].venueAddress,

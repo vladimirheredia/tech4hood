@@ -4,6 +4,7 @@ import '../models/event.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
+import 'package:intl/intl.dart';
 
 class EventDetailsPage extends StatelessWidget {
   final Event _event;
@@ -38,7 +39,7 @@ class EventDetailsPage extends StatelessWidget {
                                 fontWeight: FontWeight.bold, fontSize: 15),
                           ),
                         ),
-                        Text("Date: " + event.localDate),
+                        Text("Date: " + DateFormat.yMMMd('en_US').format(DateTime.parse(event.localDate))),
                         Text(event.venueName),
                         Text(
                           event.venueAddress,
