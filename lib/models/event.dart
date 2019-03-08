@@ -7,8 +7,9 @@ class Event extends Object{
   final localTime;
   final venueName;
   final venueAddress;
-  final groupLocaltion;
+  final groupLocation;
   final description;
+  final link;
 
   Event({
     this.id,
@@ -17,8 +18,9 @@ class Event extends Object{
     this.localTime,
     this.venueName,
     this.venueAddress,
-    this.groupLocaltion,
-    this.description
+    this.groupLocation,
+    this.description,
+    this.link
   });
 
   factory Event.fromJson(Map<String, dynamic> json){
@@ -29,8 +31,9 @@ class Event extends Object{
       localTime: json['local_time'],
       venueName: json['venue'] != null ? json['venue']['name'] : '',
       venueAddress: json['venue'] != null ? json['venue']['address_1']: '',
-      groupLocaltion: json['group']['localized_location'],
-      description: json['description']
+      groupLocation: json['group']['localized_location'],
+      description: json['description'],
+      link: json['link']
     );
   }
 }

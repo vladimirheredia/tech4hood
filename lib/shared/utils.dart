@@ -22,6 +22,7 @@ class Utilities {
 
   static Color themeBlue = Color.fromARGB(255, 18, 20, 61);
   static const Color googleGreen = Color.fromRGBO(22, 157, 85, 1.0);
+  static const Color googleRed = Color.fromRGBO(216, 65, 53, 1.0);
   static Color twitterBlue = Color.fromARGB(255, 75, 162, 235);
   static Color shopBlue = Color.fromARGB(255, 3, 49, 122);
 
