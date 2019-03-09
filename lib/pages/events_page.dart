@@ -42,7 +42,7 @@ class _EventsPageState extends State<EventsPage> {
   }
 
   //get list of events
-  Widget _getListOfEvents(List<Event> events) {
+  Widget _getListOfEvents(List<Event> events, bool isFuture) {
     return ListView.builder(
       itemCount: events == null ? 0 : events.length,
       itemBuilder: (context, index) {
@@ -50,7 +50,7 @@ class _EventsPageState extends State<EventsPage> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => EventDetailsPage(events[index])),
+              MaterialPageRoute(builder: (context) => EventDetailsPage(events[index], isFuture)),
             );
           },
           child: Container(
@@ -136,14 +136,14 @@ class _EventsPageState extends State<EventsPage> {
                 children: [
                   // tab 1 content
                   pastEvents.length > 0
-                      ? _getListOfEvents(pastEvents)
+                      ? _getListOfEvents(pastEvents, false)
                       : Center(
-                          child: Text("There's no data!"),
+                          child: Text("There's no data!", style: TextStyle(fontSize: 18)),
                         ),
 
                   // tab 2 content
                   futureEvents.length > 0
-                      ? _getListOfEvents(futureEvents)
+                      ? _getListOfEvents(futureEvents, true)
                       : Center(
                           child: Text(
                             "Ther's no future events yet!",

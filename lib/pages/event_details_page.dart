@@ -8,12 +8,14 @@ import 'package:intl/intl.dart';
 
 class EventDetailsPage extends StatelessWidget {
   final Event _event;
+  bool isFuture;
 
-  EventDetailsPage(this._event);
+  EventDetailsPage(this._event, this.isFuture);
 
   //return event information
   Widget getEventDetail(Event event) {
     return Container(
+        color: Colors.white,
         padding: EdgeInsets.only(top: 10, left: 10, right: 10),
         child: Column(
           children: [
@@ -62,7 +64,9 @@ class EventDetailsPage extends StatelessWidget {
             Container(
               child: Column(
                 children: <Widget>[
-                  Padding(
+                  isFuture ? Column(
+                    children: <Widget>[
+                    Padding(
                     padding: EdgeInsets.only(top: 10, bottom: 5),
                     child: Text("Share QRCode Below", style:TextStyle(color: Colors.grey, fontSize: 11)),
                   ),
@@ -71,16 +75,18 @@ class EventDetailsPage extends StatelessWidget {
                     Container(padding: EdgeInsets.all(10),
                     child: QrImage(data:event.link, size: 200),
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: <BoxShadow>[
-                        BoxShadow(color: Colors.grey[300], blurRadius: 10, offset: Offset.zero)
-                      ]
-                    ),
-                    )),
+                        color: Colors.white,
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(color: Colors.grey[300], blurRadius: 10, offset: Offset.zero)
+                        ]
+                      ),
+                      )
+                    )
+                  ]) : Center(child: Text('This event has passed already.', style:TextStyle(fontSize: 14, color: Colors.grey))),
                   Padding(
                     padding: EdgeInsets.all(10),
                     child: RaisedButton(
-                      color: Utilities.googleRed,
+                      color: isFuture ? Utilities.googleRed : Colors.grey,
                       child: Padding(
                         padding: EdgeInsets.only(top: 10, bottom: 10),
                         child: Row(
@@ -90,7 +96,7 @@ class EventDetailsPage extends StatelessWidget {
                               padding: EdgeInsets.only(right: 10),
                               child: Image.asset('assets/meetup_logo_white.png', width: 40, height: 40)
                             ),
-                            Text("Go to Meetup Page To Register",
+                            Text(isFuture ? "Go to Meetup Page To Register" : "View this past event",
                               style: TextStyle(color: Colors.white),
                             )
                           ],
@@ -110,18 +116,19 @@ class EventDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: isFuture ? FloatingActionButton(
         backgroundColor: Utilities.googleRed,
         child: Icon(Icons.share, color: Colors.white),
         onPressed: () {
           Share.share(_event.link);
         },
-      ),
+      ) : null,
         appBar: AppBar(
           backgroundColor: Utilities.blueOne,
           title: Text('Event details'),
         ),
         body: Container(
+          color: Colors.white,
           child: getEventDetail(_event),
         ));
   }
