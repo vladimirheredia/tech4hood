@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:async';
-import './home_page.dart';
 
 
 class SplashPage extends StatelessWidget{
@@ -10,10 +8,7 @@ class SplashPage extends StatelessWidget{
   Widget build(BuildContext context) {
       
        Future.delayed(const Duration(milliseconds: 1000), () {
-         Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage('Tech4Hood')),
-         );
+         Navigator.of(context).pushNamed('/home');
        });
 
     return  Scaffold(

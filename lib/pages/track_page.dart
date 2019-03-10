@@ -114,6 +114,14 @@ class _TrackPageState extends State<TrackPage> {
           title: Text("Your Learning Track", style: TextStyle(color: Colors.grey)),
           backgroundColor: Colors.white,
           elevation: 0,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/home'));
+              },
+            ),
+          ],
           
         ),
         body:  Container(
@@ -121,7 +129,7 @@ class _TrackPageState extends State<TrackPage> {
           child: Column(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.only(bottom: 10, left: 20, right: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -175,7 +183,7 @@ class _TrackPageState extends State<TrackPage> {
                       ],
                     ),
                     Padding(
-                      padding:EdgeInsets.only(top: 20, bottom: 20),
+                      padding:EdgeInsets.only(top: 20, bottom: 10),
                       child: Text("Based on your selected choices, we recommend the following learning track. Tap on each step for more details.",
                       textAlign: TextAlign.center,
                       style:TextStyle(color: Colors.grey, fontSize: 12)),
