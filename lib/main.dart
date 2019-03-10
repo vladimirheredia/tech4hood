@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tech4hood/pages/home_page.dart';
 import './pages/splash_page.dart';
 
 void main() => runApp(MyApp());
@@ -14,6 +15,9 @@ class MyApp extends StatelessWidget {
       ]);
       
     return MaterialApp(
+      routes: {
+        '/home': (BuildContext context) => HomePage('home')
+      },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
