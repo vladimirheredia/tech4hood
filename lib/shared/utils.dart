@@ -9,7 +9,9 @@ import 'package:tech4hood/pages/instagram_page.dart';
 import 'package:tech4hood/pages/learning_page.dart';
 import 'package:tech4hood/pages/resources_page.dart';
 import 'package:tech4hood/pages/shop_page.dart';
+import 'package:tech4hood/pages/skills_page.dart';
 import 'package:tech4hood/pages/team_page.dart';
+import 'package:tech4hood/pages/track_page.dart';
 import 'package:tech4hood/pages/youtube_page.dart';
 import '../models/menu_item.dart';
 import '../pages/events_page.dart';
@@ -20,8 +22,12 @@ import '../pages/twitter_page.dart';
 
 class Utilities {
 
+  static MenuItemModel selectedSkill;
+  static MenuItemModel selectedTech;
+
   static Color themeBlue = Color.fromARGB(255, 18, 20, 61);
   static const Color googleGreen = Color.fromRGBO(22, 157, 85, 1.0);
+  static const Color googleBlue = Color.fromRGBO(85, 126, 191, 1.0);
   static const Color googleRed = Color.fromRGBO(216, 65, 53, 1.0);
   static Color twitterBlue = Color.fromARGB(255, 75, 162, 235);
   static Color shopBlue = Color.fromARGB(255, 3, 49, 122);
@@ -98,6 +104,58 @@ class Utilities {
     return menuWidgets;
   }
 
+  static List<Widget> learningMenuWidgets(BuildContext context, List<MenuItemModel> menuItems) {
+
+    List<Widget> menuWidgets = List<Widget>();
+
+    menuItems.forEach((MenuItemModel menu) {
+      menuWidgets.add(getSingleMenuItemWidget(context, menu));
+    });
+
+    return menuWidgets;
+  }
+
+  static List<Widget> getSkillLevelMenuItemWidgets(BuildContext context, List<MenuItemModel> menuItems) {
+
+    List<Widget> menuWidgets = List<Widget>();
+
+    menuItems.forEach((MenuItemModel menu) {
+      menuWidgets.add(GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SkillsPage('Technology Track', menu)),
+          );
+        },
+        child: getMainMenuWidget(menu)
+      ));
+    });
+
+    return menuWidgets;
+  }
+
+
+  static List<Widget> getTechTrackMenuItemWidgets(BuildContext context, List<MenuItemModel> menuItems) {
+
+    List<Widget> menuWidgets = List<Widget>();
+
+    menuItems.forEach((MenuItemModel menu) {
+      menuWidgets.add(GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => TrackPage('Technology Track', menu)),
+          );
+        },
+        child: getMainMenuWidget(menu)
+      ));
+    });
+
+    return menuWidgets;
+  }
+
   static Widget getSingleMenuItemWidget(BuildContext context, MenuItemModel menu) {
     return GestureDetector(
         onTap: () {
@@ -108,7 +166,12 @@ class Utilities {
                     Utilities.getPageFromId(menu.id)),
           );
         },
-        child: Container(
+        child: getMainMenuWidget(menu)
+      );
+  }
+
+  static Widget getMainMenuWidget(MenuItemModel menu) {
+    return Container(
           height: 200,
           color: menu.bgColor.withOpacity(0.9),
           child: Stack(
@@ -153,8 +216,7 @@ class Utilities {
               )
             ],
           ),
-        )
-      );
+        );
   }
 
   //events color
@@ -169,6 +231,8 @@ class Utilities {
   static const Color blueFive = Color.fromARGB(255, 154, 215, 255);
 
   static const Color instagramColor = Color.fromARGB(255, 158, 75, 150);
+
+  
 
   static StatefulWidget getPageFromId(String id) {
     StatefulWidget pageWidget;
