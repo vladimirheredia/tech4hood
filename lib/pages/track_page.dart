@@ -97,6 +97,7 @@ class _TrackPageState extends State<TrackPage> {
                         child: Text('Go to Source', style: TextStyle(color: Colors.white)),
                       ),
                       onPressed: () {},
+                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
                     ),
                   )
                 ],
@@ -129,7 +130,7 @@ class _TrackPageState extends State<TrackPage> {
           child: Column(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(bottom: 10, left: 20, right: 20),
+                padding: EdgeInsets.only(left: 20, right: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -183,11 +184,71 @@ class _TrackPageState extends State<TrackPage> {
                       ],
                     ),
                     Padding(
-                      padding:EdgeInsets.only(top: 20, bottom: 10),
+                      padding:EdgeInsets.only(top: 20, bottom: 5),
                       child: Text("Based on your selected choices, we recommend the following learning track. Tap on each step for more details.",
                       textAlign: TextAlign.center,
                       style:TextStyle(color: Colors.grey, fontSize: 12)),
                     )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: <Widget>[
+                    Text("3 tracks available", textAlign: TextAlign.center, style: TextStyle(fontSize: 10, color: Utilities.selectedTech.bgColor)),
+                    Row(
+                      children: <Widget>[
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {},
+                              child: Container(
+                                margin:EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                                  border: Border.all(color:Utilities.selectedTech.bgColor, width: 2),
+                                  color: Utilities.selectedTech.bgColor
+                                ),
+                                padding: EdgeInsets.all(10),
+                                child: Text('Angular', textAlign: TextAlign.center, style:TextStyle(color: Colors.white, fontSize: 12))
+                              ),
+                            ),
+                            flex: 1,
+                          ),
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {},
+                              child: Container(
+                                margin:EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                                  border: Border.all(color:Utilities.selectedTech.bgColor, width: 2),
+                                  color: Colors.transparent
+                                ),
+                                padding: EdgeInsets.all(10),
+                                child: Text('React', textAlign: TextAlign.center, style:TextStyle(color: Utilities.selectedTech.bgColor, fontSize: 12))
+                              ),
+                            ),
+                            flex: 1,
+                          ),
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {},
+                              child: Container(
+                                margin:EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                                  border: Border.all(color:Utilities.selectedTech.bgColor, width: 2),
+                                  color: Colors.transparent
+                                ),
+                                padding: EdgeInsets.all(10),
+                                child: Text('Vue', textAlign: TextAlign.center, style:TextStyle(color: Utilities.selectedTech.bgColor, fontSize: 12))
+                              ),
+                            ),
+                            flex: 1,
+                          )
+                      ],
+                    ),
                   ],
                 ),
               ),
