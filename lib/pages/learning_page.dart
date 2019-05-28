@@ -22,7 +22,8 @@ class _LearningPageState extends State<LearningPage> {
       Color(0xff2C1940),
       Colors.white,
       'skills',
-      'beginner_banner.jpg'
+      'beginner_banner.jpg',
+      'Beginner'
     ),
      MenuItemModel(
       'Intermediate',
@@ -30,7 +31,8 @@ class _LearningPageState extends State<LearningPage> {
       Color(0xff59337F),
       Colors.white,
       'skills',
-      'intermediate_banner.jpg'
+      'intermediate_banner.jpg',
+      'Intermediate'
     ),
      MenuItemModel(
       'Advanced',
@@ -38,7 +40,8 @@ class _LearningPageState extends State<LearningPage> {
       Color(0xFF854CBF),
       Colors.white,
       'skills',
-      'advanced_banner.jpg'
+      'advanced_banner.jpg',
+      'Advanced'
     )
   ];
 
