@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MenuItemModel extends Object {
-  MenuItemModel(this.label, this.image, this.bgColor, this.labelColor, this.id, [this.bgImage]);
+  MenuItemModel(this.label, this.image, this.bgColor, this.labelColor, this.id, [this.bgImage, this.metadata]);
 
   final String label;
   final Color bgColor;
@@ -9,4 +9,5 @@ class MenuItemModel extends Object {
   final String image;
   final String id;
   final String bgImage;
+  final String metadata;
 }

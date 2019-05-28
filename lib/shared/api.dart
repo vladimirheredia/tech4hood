@@ -16,6 +16,12 @@ class API {
     return await http.get(url);
   }
 
+  //gets all the members from meetup api
+  static Future getLearningTrack({skill: String, level: String}) async {
+    var url = baseUrl + '/getLearningTrack?skill=' + skill + '&level=' + level;
+    return await http.get(url);
+  }
+
   //gets all the tweets from Twitter api
   static Future getAllTweets() async {
     var url = baseUrl + '/getTweets';

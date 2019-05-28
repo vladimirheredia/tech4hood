@@ -25,7 +25,8 @@ class _SkillsPageState extends State<SkillsPage> {
       Color(0xffee5455),
       Colors.white,
       'track',
-      'arvr_banner.jpg'
+      'arvr_banner.jpg',
+      'ARVR'
     ),
      MenuItemModel(
       'Web Dev',
@@ -33,7 +34,8 @@ class _SkillsPageState extends State<SkillsPage> {
       Color(0xff15b1ad),
       Colors.white,
       'track',
-      'webdev_banner.jpg'
+      'webdev_banner.jpg',
+      'WebDev'
     ),
     MenuItemModel(
       'Mobile Dev',
@@ -41,7 +43,8 @@ class _SkillsPageState extends State<SkillsPage> {
       Color(0xffffa511),
       Colors.white,
       'track',
-      'mobiledev_banner.jpg'
+      'mobiledev_banner.jpg',
+      'MobileDev'
     ),
     MenuItemModel(
       'DevOps',
@@ -49,7 +52,8 @@ class _SkillsPageState extends State<SkillsPage> {
       Color(0xff9d1de6),
       Colors.white,
       'track',
-      'devops_banner.png'
+      'devops_banner.png',
+      'DevOps'
     ),
     MenuItemModel(
       'Cloud',
@@ -57,15 +61,17 @@ class _SkillsPageState extends State<SkillsPage> {
       Color(0xff008c01),
       Colors.white,
       'track',
-      'cloudstorage_banner.png'
+      'cloudstorage_banner.png',
+      'Cloud'
     ),
     MenuItemModel(
-      '3D Modeling',
-      't4h_services_3dmodeling.png',
+      'Backend',
+      'backend_icon.png',
       Color(0xff5852ec),
       Colors.white,
       'track',
-      '3dmodeling_banner.jpg'
+      'backend_banner.jpg',
+      'Backend'
     ),
   ];
 
