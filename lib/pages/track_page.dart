@@ -156,7 +156,7 @@ class _TrackPageState extends State<TrackPage> {
                             Icon(Icons.alarm, color: Utilities.selectedTech.bgColor, size: 30),
                             Container(
                               width: 80,
-                              child: Text(_selectedLearningResource.length == '—-' ? 'Not specified' : (_selectedLearningResource.length + ' aprox. completion time'), style: TextStyle(color: Colors.grey, fontSize: 10), textAlign: TextAlign.center),
+                              child: Text(_selectedLearningResource.length == '--' ? 'Not specified' : (_selectedLearningResource.length + ' approx. completion time'), style: TextStyle(color: Colors.grey, fontSize: 10), textAlign: TextAlign.center),
                             )
                           ],
                         ),

@@ -25,12 +25,13 @@ class Utilities {
   static MenuItemModel selectedSkill;
   static MenuItemModel selectedTech;
 
-  static Color themeBlue = Color.fromARGB(255, 18, 20, 61);
+  static const Color themeBlue = Color.fromARGB(255, 18, 20, 61);
   static const Color googleGreen = Color.fromRGBO(22, 157, 85, 1.0);
   static const Color googleBlue = Color.fromRGBO(85, 126, 191, 1.0);
   static const Color googleRed = Color.fromRGBO(216, 65, 53, 1.0);
-  static Color twitterBlue = Color.fromARGB(255, 75, 162, 235);
-  static Color shopBlue = Color.fromARGB(255, 3, 49, 122);
+  static const Color twitterBlue = Color.fromARGB(255, 75, 162, 235);
+  static const Color shopBlue = Color.fromARGB(255, 3, 49, 122);
+  static const Color youtubeRed = Color.fromARGB(255, 233, 25, 33);
 
   static List<MenuItemModel> getMenuItems() {
       return <MenuItemModel>[

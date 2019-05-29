@@ -59,7 +59,7 @@ class API {
 
   //get youtube videos
   static Future getYoutubeVideos() async {
-    var url = baseUrl + '/getResources';
+    var url = baseUrl + '/getYouTubeVideos';
     return await http.get(url);
   }
 }
