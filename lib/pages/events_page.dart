@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tech4hood/components/notification_panel.dart';
+import 'package:tech4hood/pages/base_page.dart';
 import '../shared/utils.dart';
 import '../models/event.dart';
 import '../shared/api.dart';
@@ -6,9 +8,8 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 import '../pages/event_details_page.dart';
 
-class EventsPage extends StatefulWidget {
+class EventsPage extends StatefulWidget with BasePageMixin {
   final String title;
-
   EventsPage(this.title);
 
   @override
@@ -30,6 +31,10 @@ class _EventsPageState extends State<EventsPage> {
         pastEvents = listPast.map((model) => Event.fromJson(model)).toList();
         futureEvents =
             listFuture.map((model) => Event.fromJson(model)).toList();
+      });
+    }).catchError((error) {
+      setState(() {
+        widget.errorNotification = 'There was a problem fetching event information. Please try again.';
       });
     });
   }
@@ -152,9 +157,7 @@ class _EventsPageState extends State<EventsPage> {
                         )
                 ],
               )
-            : Center(
-                child: CircularProgressIndicator(),
-              ),
+            : widget.handleDataFetchingProgress()
       ),
     );
   }
