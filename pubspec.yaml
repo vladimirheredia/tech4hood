@@ -21,6 +21,7 @@ dependencies:
   qr_flutter: ^2.0.0
   youtube_player: ^3.4.1
   youtube_player_flutter: ^1.1.1+1
+  
   flutter:
     sdk: flutter
   

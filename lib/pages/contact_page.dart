@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'package:tech4hood/models/contact_model.dart';
+import 'package:tech4hood/pages/base_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:tech4hood/shared/api.dart';
 import 'package:tech4hood/shared/utils.dart';
 
-class ContactPage extends StatefulWidget {
+class ContactPage extends StatefulWidget with BasePageMixin {
   final String title;
 
   ContactPage(this.title);
@@ -33,6 +34,10 @@ class _ContactPageState extends State<ContactPage> {
           contactItems.add(Utilities.getContactInfoRow(item, onSelectedResource));
         }
       });
+    }).catchError((error) {
+      setState(() {
+        widget.errorNotification = 'There was a problem fetching contact information. Please try again';
+      });
     });
   }
 
@@ -48,7 +53,7 @@ class _ContactPageState extends State<ContactPage> {
         body: Container(
           child: contactItems.length > 0
               ? ListView(children: contactItems)
-              : Center(child: CircularProgressIndicator()),
+              : widget.handleDataFetchingProgress(),
         ));
   }
 }

@@ -2,11 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:tech4hood/models/youtubevideo_model.dart';
+import 'package:tech4hood/pages/base_page.dart';
 import 'package:tech4hood/pages/youtube_player_page.dart';
 import 'package:tech4hood/shared/api.dart';
 import 'package:tech4hood/shared/utils.dart';
 
-class YouTubePage extends StatefulWidget {
+class YouTubePage extends StatefulWidget with BasePageMixin {
 
   final String title;
 
@@ -43,6 +44,10 @@ class _YouTubePageState extends State<YouTubePage> {
         }
       });
 
+    }).catchError((error) {
+      setState(() {
+        widget.errorNotification = 'There was a problem fetching YouTube data. Please try again.';
+      });
     });
   }
 
@@ -94,9 +99,7 @@ class _YouTubePageState extends State<YouTubePage> {
               ),
             );
           }
-        ) : Center(
-          child: CircularProgressIndicator(),
-        )
+        ) : widget.handleDataFetchingProgress()
       );
   }
 }

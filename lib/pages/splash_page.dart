@@ -19,7 +19,7 @@ class SplashPage extends StatelessWidget{
         child:  Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset('assets/t4h_mobile_logo.png', width: 200.0, height: 150.0, fit: BoxFit.contain),
+            Image.asset('assets/t4h_mobile_logo.png', width: 150.0, height: 100.0, fit: BoxFit.contain),
              Container(
               margin: const EdgeInsets.only(top: 20.0),
               child:  CircularProgressIndicator(

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:tech4hood/components/notification_panel.dart';
+import 'package:tech4hood/pages/base_page.dart';
 import '../models/member.dart';
 import '../shared/api.dart';
 import 'dart:convert';
 import '../shared/utils.dart';
 
-class MembersPage extends StatefulWidget {
+class MembersPage extends StatefulWidget with BasePageMixin {
   final String title;
 
   MembersPage(this.title);
@@ -36,6 +38,10 @@ class MembersPageState extends State<MembersPage> {
         for (var item in memlist) {
           members.add(getMemberWidget(item));
         }
+      });
+    }).catchError((error) {
+      setState(() {
+        widget.errorNotification = 'There was a problem fetching members information. Please try again.';
       });
     });
   }
@@ -110,7 +116,7 @@ class MembersPageState extends State<MembersPage> {
         body: Container(
           child: members.length > 0
               ? ListView(children: getWidgets())
-              : Center(child: CircularProgressIndicator()),
+              : widget.handleDataFetchingProgress()
         ));
   }
 }

@@ -2,13 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:tech4hood/models/shopentry.dart';
+import 'package:tech4hood/pages/base_page.dart';
 import 'package:tech4hood/shared/api.dart';
 import 'package:tech4hood/shared/utils.dart';
 import 'package:xml/xml.dart' as xml;
 import 'package:xml/xml.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ShopPage extends StatefulWidget {
+class ShopPage extends StatefulWidget with BasePageMixin {
 
   final String title;
 
@@ -36,6 +37,10 @@ class _ShopPageState extends State<ShopPage> {
         for (var item in allProducts["articles"]["article"]) {
             allProductsList.add(ShopEntry.fromJson(item));
         }
+      });
+    }).catchError((error) {
+      setState(() {
+        widget.errorNotification = 'There was a problem fetching data from the shop. Please try again.';
       });
     });
   }
@@ -92,7 +97,7 @@ class _ShopPageState extends State<ShopPage> {
                   )
                 ],
               )
-              : Center(child: CircularProgressIndicator()),
+              : widget.handleDataFetchingProgress(),
         ));
   }
 }

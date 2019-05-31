@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:tech4hood/models/instagram_entry.dart';
+import 'package:tech4hood/pages/base_page.dart';
 import 'package:tech4hood/pages/instagram_details_page.dart';
 import 'package:tech4hood/shared/api.dart';
 import 'package:tech4hood/shared/utils.dart';
 
-class InstagramPage extends StatefulWidget {
+class InstagramPage extends StatefulWidget with BasePageMixin {
   final String title;
   
-
   InstagramPage(this.title);
 
   @override
@@ -40,6 +40,10 @@ class _InstagramPageState extends State<InstagramPage> {
               .add(Utilities.getInstagramCell(item, onSelectedInstagramImage));
         }
       });
+    }).catchError((error) {
+      setState(() {
+        widget.errorNotification = 'There was a problem fetching Instagram information. Please try again.';
+      });
     });
   }
 
@@ -67,7 +71,7 @@ class _InstagramPageState extends State<InstagramPage> {
                   maxCrossAxisExtent: 220,
                   children: instagramImages,
                 )
-              : Center(child: CircularProgressIndicator()),
+              : widget.handleDataFetchingProgress(),
         ));
   }
 }

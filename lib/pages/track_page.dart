@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:tech4hood/models/learning_track.dart';
+import 'package:tech4hood/pages/base_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:tech4hood/models/menu_item.dart';
 import 'package:tech4hood/shared/api.dart';
 import 'package:tech4hood/shared/utils.dart';
 
-class TrackPage extends StatefulWidget {
+class TrackPage extends StatefulWidget with BasePageMixin {
 
   String title;
 
@@ -42,6 +43,10 @@ class _TrackPageState extends State<TrackPage> {
         isFetchingData = false;
         var allLearningResources = json.decode(response.body);
         this.setupLearningTracks(allLearningResources);
+      });
+    }).catchError((error) {
+      setState(() {
+        widget.errorNotification = 'There was a problem fetching learning track information. Please try again.';
       });
     });
   }
@@ -343,9 +348,8 @@ class _TrackPageState extends State<TrackPage> {
               )
             ],
           ),
-        ) : (isFetchingData ? Center(
-          child: CircularProgressIndicator(backgroundColor: Utilities.selectedSkill.bgColor)
-        ) : Container(
+        ) : (isFetchingData ? widget.handleDataFetchingProgress()
+        : Container(
               padding: EdgeInsets.all(50),
               color: Colors.white,
               child: Center(

@@ -1,11 +1,12 @@
 import 'dart:convert';
+import 'package:tech4hood/pages/base_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:tech4hood/models/team_member.dart';
 import 'package:tech4hood/shared/api.dart';
 import 'package:tech4hood/shared/utils.dart';
 
-class TeamPage extends StatefulWidget {
+class TeamPage extends StatefulWidget with BasePageMixin {
   final String title;
 
   TeamPage(this.title);
@@ -33,6 +34,10 @@ class _TeamPageState extends State<TeamPage> {
           teamCards.add(Utilities.getTeamMemberCard(item, onSelectedResource));
         }
       });
+    }).catchError((error) {
+      setState(() {
+        widget.errorNotification = 'There was a problem fetching team information. Please try again.';
+      });
     });
   }
 
@@ -49,7 +54,7 @@ class _TeamPageState extends State<TeamPage> {
           color: Colors.grey[300],
           child: teamCards.length > 0
               ? ListView(children: teamCards)
-              : Center(child: CircularProgressIndicator()),
+              : widget.handleDataFetchingProgress(),
         ));
   }
 }

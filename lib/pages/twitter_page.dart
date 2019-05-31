@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:tech4hood/pages/base_page.dart';
 import '../shared/api.dart';
 import 'dart:convert';
 import '../models/tweet.dart';
 import '../shared/utils.dart';
 import 'package:intl/intl.dart';
 
-class TwitterPage extends StatefulWidget {
+class TwitterPage extends StatefulWidget with BasePageMixin {
   final String title;
 
   TwitterPage(this.title);
@@ -35,6 +36,10 @@ class TwitterPageState extends State<TwitterPage> {
         for (var item in _tweets) {
           tweets.add(getTweetWidget(item));
         }
+      });
+    }).catchError((error) {
+      setState(() {
+        widget.errorNotification = 'There was a problem fetching Twitter data. Please try again.';
       });
     });
   }
@@ -111,9 +116,7 @@ class TwitterPageState extends State<TwitterPage> {
               ? tweets.length > 0
                   ? ListView(children: getWidgets())
                   : Center(child: CircularProgressIndicator())
-              : Center(
-                  child: Center(child: CircularProgressIndicator()),
-                ),
+              : widget.handleDataFetchingProgress(),
         ));
   }
 }

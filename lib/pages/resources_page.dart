@@ -1,11 +1,12 @@
 import 'dart:convert';
+import 'package:tech4hood/pages/base_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:tech4hood/models/resources.dart';
 import 'package:tech4hood/shared/api.dart';
 import 'package:tech4hood/shared/utils.dart';
 
-class ResourcesPage extends StatefulWidget {
+class ResourcesPage extends StatefulWidget with BasePageMixin {
 
   final String title;
 
@@ -37,6 +38,10 @@ class _ResourcesPageState extends State<ResourcesPage> {
           resources.add(Utilities.getResourceRowWidget(item, onSelectedResource));
         }
       });
+    }).catchError((error) {
+      setState(() {
+        widget.errorNotification = 'There was a problem fetching resources information. Please try again.';
+      });
     });
   }
 
@@ -51,7 +56,7 @@ class _ResourcesPageState extends State<ResourcesPage> {
         body: Container(
           child: resources.length > 0
               ? ListView(children: resources)
-              : Center(child: CircularProgressIndicator()),
+              : widget.handleDataFetchingProgress(),
         ));
   }
 
