@@ -25,24 +25,28 @@ class MembersPageState extends State<MembersPage> {
     API.getAllMembers().then((response) {
       //get list of member objects
       List<Member> memlist = List<Member>();
-      setState(() {
-        //get list of members from api call
-        var allMembers = json.decode(response.body);
-        //create list of members
-        for (var item in allMembers) {
-          if (item['photo'] != null) {
-            memlist.add(Member.fromJson(item));
+      if (mounted) {
+        setState(() {
+          //get list of members from api call
+          var allMembers = json.decode(response.body);
+          //create list of members
+          for (var item in allMembers) {
+            if (item['photo'] != null) {
+              memlist.add(Member.fromJson(item));
+            }
           }
-        }
-        //create list of widgets
-        for (var item in memlist) {
-          members.add(getMemberWidget(item));
-        }
-      });
+          //create list of widgets
+          for (var item in memlist) {
+            members.add(getMemberWidget(item));
+          }
+        });
+      }
     }).catchError((error) {
-      setState(() {
-        widget.errorNotification = 'There was a problem fetching members information. Please try again.';
-      });
+      if (mounted) {
+        setState(() {
+          widget.errorNotification = 'There was a problem fetching members information. Please try again.';
+        });
+      }
     });
   }
 

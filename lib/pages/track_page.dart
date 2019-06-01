@@ -39,15 +39,19 @@ class _TrackPageState extends State<TrackPage> {
     isFetchingData = true;
     API.getLearningTrack(skill: Utilities.selectedTech.metadata, level: Utilities.selectedSkill.metadata).then((response) {
 
-      setState(() {
-        isFetchingData = false;
-        var allLearningResources = json.decode(response.body);
-        this.setupLearningTracks(allLearningResources);
-      });
+      if (mounted) {
+        setState(() {
+          isFetchingData = false;
+          var allLearningResources = json.decode(response.body);
+          this.setupLearningTracks(allLearningResources);
+        });
+      }
     }).catchError((error) {
-      setState(() {
-        widget.errorNotification = 'There was a problem fetching learning track information. Please try again.';
-      });
+      if (mounted) {
+        setState(() {
+          widget.errorNotification = 'There was a problem fetching learning track information. Please try again.';
+        });
+      }
     });
   }
 
@@ -82,9 +86,11 @@ class _TrackPageState extends State<TrackPage> {
         Expanded(
           child: InkWell(
             onTap: () {
-              setState(() {
-                _selectedLearningTrack = track;
-              });
+              if (mounted) {
+                setState(() {
+                  _selectedLearningTrack = track;
+                });
+              }
             },
             child: Container(
               margin:EdgeInsets.all(5),

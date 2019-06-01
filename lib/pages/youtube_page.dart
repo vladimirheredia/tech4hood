@@ -33,21 +33,24 @@ class _YouTubePageState extends State<YouTubePage> {
     isFetchingData = true;
     API.getYoutubeVideos().then((response) {
 
-      setState(() {
-
-        isFetchingData = false;
-        //get list of videos from api call
-        var allVideos = json.decode(response.body);
-        //populate list of videos
-        for (var item in allVideos) {
-            youtubeVideos.add(YouTubeVideoModel.fromJson(item));
-        }
-      });
+      if (mounted) {
+        setState(() {
+          isFetchingData = false;
+          //get list of videos from api call
+          var allVideos = json.decode(response.body);
+          //populate list of videos
+          for (var item in allVideos) {
+              youtubeVideos.add(YouTubeVideoModel.fromJson(item));
+          }
+        });
+      }
 
     }).catchError((error) {
-      setState(() {
-        widget.errorNotification = 'There was a problem fetching YouTube data. Please try again.';
-      });
+      if (mounted) {
+        setState(() {
+          widget.errorNotification = 'There was a problem fetching YouTube data. Please try again.';
+        });
+      }
     });
   }
 

@@ -23,19 +23,23 @@ class _EventsPageState extends State<EventsPage> {
 
   void _getAllEvents() {
     API.getAllEvents().then((response) {
-      setState(() {
-        var allEvents = json.decode(response.body);
-        Iterable listPast = allEvents['pastEvents'];
-        Iterable listFuture = allEvents['upcomingEvents'];
+      if (mounted) {
+          setState(() {
+          var allEvents = json.decode(response.body);
+          Iterable listPast = allEvents['pastEvents'];
+          Iterable listFuture = allEvents['upcomingEvents'];
 
-        pastEvents = listPast.map((model) => Event.fromJson(model)).toList();
-        futureEvents =
-            listFuture.map((model) => Event.fromJson(model)).toList();
-      });
+          pastEvents = listPast.map((model) => Event.fromJson(model)).toList();
+          futureEvents =
+              listFuture.map((model) => Event.fromJson(model)).toList();
+        });
+      }
     }).catchError((error) {
-      setState(() {
-        widget.errorNotification = 'There was a problem fetching event information. Please try again.';
-      });
+      if (mounted) {
+          setState(() {
+          widget.errorNotification = 'There was a problem fetching event information. Please try again.';
+        });
+      }
     });
   }
 

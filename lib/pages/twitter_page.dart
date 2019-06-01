@@ -25,22 +25,26 @@ class TwitterPageState extends State<TwitterPage> {
     API.getAllTweets().then((response) {
       List<Tweet> _tweets = List<Tweet>();
 
-      setState(() {
-        var allTweets = json.decode(response.body);
-        tweets = List<Widget>();
+      if (mounted) {
+        setState(() {
+          var allTweets = json.decode(response.body);
+          tweets = List<Widget>();
 
-        for (var item in allTweets) {
-          _tweets.add(Tweet.fromJson(item));
-        }
+          for (var item in allTweets) {
+            _tweets.add(Tweet.fromJson(item));
+          }
 
-        for (var item in _tweets) {
-          tweets.add(getTweetWidget(item));
-        }
-      });
+          for (var item in _tweets) {
+            tweets.add(getTweetWidget(item));
+          }
+        });
+      }
     }).catchError((error) {
-      setState(() {
-        widget.errorNotification = 'There was a problem fetching Twitter data. Please try again.';
-      });
+      if (mounted) {
+        setState(() {
+          widget.errorNotification = 'There was a problem fetching Twitter data. Please try again.';
+        });
+      }
     });
   }
 

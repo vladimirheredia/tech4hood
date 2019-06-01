@@ -7,7 +7,7 @@ class SplashPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
       
-       Future.delayed(const Duration(milliseconds: 1000), () {
+       Future.delayed(const Duration(milliseconds: 2000), () {
          Navigator.of(context).pushNamed('/home');
        });
 
@@ -19,9 +19,9 @@ class SplashPage extends StatelessWidget{
         child:  Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset('assets/t4h_mobile_logo.png', width: 150.0, height: 100.0, fit: BoxFit.contain),
+            Image.asset('assets/t4h_cloud_logo.png', width: 150.0, height: 100.0, fit: BoxFit.contain),
              Container(
-              margin: const EdgeInsets.only(top: 20.0),
+              margin: const EdgeInsets.only(top: 50.0),
               child:  CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation(Color.fromARGB(255, 255, 255, 255)),
                 strokeWidth: 5.0

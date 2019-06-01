@@ -27,23 +27,27 @@ class _InstagramPageState extends State<InstagramPage> {
       //get list of member objects
       List<InstagramEntry> instagramList = List<InstagramEntry>();
 
-      setState(() {
-        //get list of members from api call
-        var allInstagramEntries = json.decode(response.body);
-        //create list of members
-        for (var item in allInstagramEntries['data']) {
-          instagramList.add(InstagramEntry.fromJson(item));
-        }
-        //create list of widgets
-        for (var item in instagramList) {
-          instagramImages
-              .add(Utilities.getInstagramCell(item, onSelectedInstagramImage));
-        }
-      });
+      if (mounted) {
+        setState(() {
+          //get list of members from api call
+          var allInstagramEntries = json.decode(response.body);
+          //create list of members
+          for (var item in allInstagramEntries['data']) {
+            instagramList.add(InstagramEntry.fromJson(item));
+          }
+          //create list of widgets
+          for (var item in instagramList) {
+            instagramImages
+                .add(Utilities.getInstagramCell(item, onSelectedInstagramImage));
+          }
+        });
+      }
     }).catchError((error) {
-      setState(() {
-        widget.errorNotification = 'There was a problem fetching Instagram information. Please try again.';
-      });
+      if (mounted) {
+        setState(() {
+          widget.errorNotification = 'There was a problem fetching Instagram information. Please try again.';
+        });
+      }
     });
   }
 

@@ -1,4 +1,4 @@
-package com.example.tech4hood;
+package com.drcoderz.t4h;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

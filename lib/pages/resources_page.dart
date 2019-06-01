@@ -26,22 +26,27 @@ class _ResourcesPageState extends State<ResourcesPage> {
     API.getResources().then((response) {
       //get list of member objects
       List<ResourceModel> resourcesList = List<ResourceModel>();
-      setState(() {
-        //get list of members from api call
-        var allMembers = json.decode(response.body);
-        //create list of members
-        for (var item in allMembers) {
-            resourcesList.add(ResourceModel.fromJson(item));
-        }
-        //create list of widgets
-        for (var item in resourcesList) {
-          resources.add(Utilities.getResourceRowWidget(item, onSelectedResource));
-        }
-      });
+      
+      if (mounted) {
+        setState(() {
+          //get list of members from api call
+          var allMembers = json.decode(response.body);
+          //create list of members
+          for (var item in allMembers) {
+              resourcesList.add(ResourceModel.fromJson(item));
+          }
+          //create list of widgets
+          for (var item in resourcesList) {
+            resources.add(Utilities.getResourceRowWidget(item, onSelectedResource));
+          }
+        });
+      }
     }).catchError((error) {
-      setState(() {
-        widget.errorNotification = 'There was a problem fetching resources information. Please try again.';
-      });
+      if (mounted) {
+        setState(() {
+          widget.errorNotification = 'There was a problem fetching resources information. Please try again.';
+        });
+      }
     });
   }
 

@@ -23,21 +23,25 @@ class _ContactPageState extends State<ContactPage> {
 
     API.getContactInfo().then((response) {
       //get list of member objects
-      setState(() {
-        //get list of members from api call
-        var allContacts = json.decode(response.body);
+      if (mounted) {
+        setState(() {
+          //get list of members from api call
+          var allContacts = json.decode(response.body);
 
-        var contactsList = Utilities.createContacts(allContacts);
+          var contactsList = Utilities.createContacts(allContacts);
 
-        //create list of widgets
-        for (var item in contactsList) {
-          contactItems.add(Utilities.getContactInfoRow(item, onSelectedResource));
-        }
-      });
+          //create list of widgets
+          for (var item in contactsList) {
+            contactItems.add(Utilities.getContactInfoRow(item, onSelectedResource));
+          }
+        });
+      }
     }).catchError((error) {
-      setState(() {
-        widget.errorNotification = 'There was a problem fetching contact information. Please try again';
-      });
+      if (mounted) {
+        setState(() {
+          widget.errorNotification = 'There was a problem fetching contact information. Please try again';
+        });
+      }
     });
   }
 

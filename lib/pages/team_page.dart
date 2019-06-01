@@ -23,21 +23,25 @@ class _TeamPageState extends State<TeamPage> {
 
     API.getTech4HoodTeam().then((response) {
       //get list of member objects
-      setState(() {
-        //get list of members from api call
-        var allMembers = json.decode(response.body);
+      if (mounted) {
+        setState(() {
+          //get list of members from api call
+          var allMembers = json.decode(response.body);
 
-        var teamMembersList = Utilities.createTeamMembers(allMembers);
+          var teamMembersList = Utilities.createTeamMembers(allMembers);
 
-        //create list of widgets
-        for (var item in teamMembersList) {
-          teamCards.add(Utilities.getTeamMemberCard(item, onSelectedResource));
-        }
-      });
+          //create list of widgets
+          for (var item in teamMembersList) {
+            teamCards.add(Utilities.getTeamMemberCard(item, onSelectedResource));
+          }
+        });
+      }
     }).catchError((error) {
-      setState(() {
-        widget.errorNotification = 'There was a problem fetching team information. Please try again.';
-      });
+      if (mounted) {
+        setState(() {
+          widget.errorNotification = 'There was a problem fetching team information. Please try again.';
+        });
+      }
     });
   }
 

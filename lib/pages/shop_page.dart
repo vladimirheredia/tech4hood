@@ -30,18 +30,22 @@ class _ShopPageState extends State<ShopPage> {
 
     API.getT4HShop().then((response) {
       //get list of member objects
-      setState(() {
-        //get list of members from api call
-        var allProducts = json.decode(response.body);
-        //create list of members
-        for (var item in allProducts["articles"]["article"]) {
-            allProductsList.add(ShopEntry.fromJson(item));
-        }
-      });
+      if (mounted) {
+        setState(() {
+          //get list of members from api call
+          var allProducts = json.decode(response.body);
+          //create list of members
+          for (var item in allProducts["articles"]["article"]) {
+              allProductsList.add(ShopEntry.fromJson(item));
+          }
+        });
+      }
     }).catchError((error) {
-      setState(() {
-        widget.errorNotification = 'There was a problem fetching data from the shop. Please try again.';
-      });
+      if (mounted) {
+        setState(() {
+          widget.errorNotification = 'There was a problem fetching data from the shop. Please try again.';
+        });
+      }
     });
   }
 
